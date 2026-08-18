@@ -3,7 +3,7 @@
 > 一个开箱即用的 **AI Agent Skill**：上传任意图片，说一句风格名，自动转换为 27 种精心调校的画风。
 > 你不需要会写提示词，中文随口一说就行。
 
-[![Skill](https://img.shields.io/badge/type-Agent%20Skill-blue)](https://github.com) [![Styles](https://img.shields.io/badge/styles-27-green)](references/style-library.json) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Skill](https://img.shields.io/badge/type-Agent%20Skill-blue)](https://github.com) [![Styles](https://img.shields.io/badge/styles-27-green)](image-style-transfer/references/style-library.json) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ---
 
@@ -16,7 +16,7 @@
 AI：自动匹配风格库 → 调用图生图 → 返回转换后的图片
 ```
 
-**核心资产**是 [`references/style-library.json`](references/style-library.json)：27 个风格条目，每个都包含——
+**核心资产**是 [`references/style-library.json`](image-style-transfer/references/style-library.json)：27 个风格条目，每个都包含——
 
 | 字段 | 说明 |
 |------|------|
@@ -105,7 +105,7 @@ Agent 会读取风格库匹配触发词 → 取出调校好的提示词 → 按�
 
 ## 扩充风格库
 
-往 [`references/style-library.json`](references/style-library.json) 的 `styles` 数组追加条目即可，保持相同字段结构：
+往 [`references/style-library.json`](image-style-transfer/references/style-library.json) 的 `styles` 数组追加条目即可，保持相同字段结构：
 
 ```json
 {
