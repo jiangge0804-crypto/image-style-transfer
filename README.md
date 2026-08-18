@@ -3,7 +3,7 @@
 > 一个开箱即用的 **AI Agent Skill**：上传任意图片，说一句风格名，自动转换为 27 种精心调校的画风。
 > 你不需要会写提示词，中文随口一说就行。
 
-[![Skill](https://img.shields.io/badge/type-Agent%20Skill-blue)](https://github.com) [![Styles](https://img.shields.io/badge/styles-27-green)](image-style-transfer/references/style-library.json) [![Engine](https://img.shields.io/badge/engine-MiniMax%20image--01-orange)](image-style-transfer/scripts/generate_image_minimax.py) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Skill](https://img.shields.io/badge/type-Agent%20Skill-blue)](https://github.com) [![Styles](https://img.shields.io/badge/styles-27-green)](image-style-transfer/references/style-library.json) [![Engine](https://img.shields.io/badge/engine-Jimeng%20Seedream%205.0%20Lite-orange)](image-style-transfer/scripts/generate_image_seedream.py) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ---
 
@@ -16,16 +16,16 @@
 AI：自动匹配风格库 → 调用生图引擎 → 返回转换后的图片
 ```
 
-**默认生图引擎：MiniMax image-01（海螺生图）**——skill 自带 [`scripts/generate_image_minimax.py`](image-style-transfer/scripts/generate_image_minimax.py)，国内直连 [platform.minimaxi.com](https://platform.minimaxi.com)，仅需配置 `MINIMAX_API_KEY` 即可使用；无 Key 或 API 不可用时，自动降级到宿主 Agent 自带的通用图生图工具。
+**默认生图引擎：即梦「图片 5.0 Lite」= 火山方舟 `doubao-seedream-5-0-lite-260128`**——skill 自带 [`scripts/generate_image_seedream.py`](image-style-transfer/scripts/generate_image_seedream.py)，国内直连 [火山方舟 ark.cn-beijing.volces.com](https://console.volcengine.com/ark)，仅需配置 `ARK_API_KEY` 即可使用；无 Key 或 API 不可用时，自动降级到 [`scripts/generate_image_minimax.py`](image-style-transfer/scripts/generate_image_minimax.py) (MiniMax image-01)，再不行就降级到宿主 Agent 自带的通用图生图工具。
 
 ```
 你：上传一张照片 +「转成吉卜力风」
   ↓
 Agent 读 style-library.json 匹配 → 取出 prompt + input_fidelity
   ↓
-调用 scripts/generate_image_minimax.py (--image <你的照片> --prompt <库里提示词> --aspect-ratio ...)
+调用 scripts/generate_image_seedream.py (--image <你的照片> --prompt <库里提示词>)
   ↓
-国内直连 MiniMax image-01 → 返回生成图
+国内直连即梦 Seedream 5.0 Lite → 自动按原图比例输出 2K 像素 → 返回生成图
 ```
 
 **核心资产**是 [`references/style-library.json`](image-style-transfer/references/style-library.json)：27 个风格条目，每个都包含——
@@ -91,11 +91,11 @@ Agent 读 style-library.json 匹配 → 取出 prompt + input_fidelity
 ### 前提
 
 - 一个能调用图生图的 Agent 环境（WorkBuddy、Claude Code、Cursor 等均可）
-- 若使用默认的 **MiniMax image-01** 引擎：申请一个 [MiniMax 开放平台 API Key](https://platform.minimaxi.com/user-center/basic-information/interface-key)，写到 shell 配置：
+- 若使用默认的 **即梦 Seedream 5.0 Lite** 引擎：申请一个 [火山方舟 API Key](https://console.volcengine.com/ark/region:cn-beijing/apiKey)，写到 shell 配置：
   ```bash
-  echo 'export MINIMAX_API_KEY="你的key"' >> ~/.zshrc && source ~/.zshrc
+  echo 'export ARK_API_KEY="你的key"' >> ~/.zshrc && source ~/.zshrc
   ```
-  无 Key 时 Agent 会自动降级到宿主自带的图生图工具。
+  无 Key 时 Agent 会自动降级到 MiniMax image-01（需另外配 `MINIMAX_API_KEY`），再不行就降级到宿主自带的图生图工具。
 
 ### 安装
 
@@ -122,12 +122,13 @@ Agent 会读取风格库匹配触发词 → 取出调校好的提示词 → 按�
 
 | 引擎 | 优点 | 缺点 | 何时使用 |
 |------|------|------|---------|
-| **MiniMax image-01**（默认） | 主体一致性强、人物面部保留好；国内直连快、便宜 | 国风/水墨类偶有 AI 文字伪影 | 默认首选；人像、Q版、丑萌等需要保留角色的场景 |
-| **宿主自带图生图**（备选） | 多档保真度可调；预设丰富 | 主体一致性弱于 image-01；换装/重构容易跑脸 | 无 MINIMAX_API_KEY 时；用户明确要求时 |
+| **即梦 Seedream 5.0 Lite** = `doubao-seedream-5-0-lite-260128`（**默认**） | 主体一致性强、人物面部保留好；国内直连；按张 ¥0.22 便宜；图生图支持 base64；可输出 1K/2K/3K/4K | 不接受 `size: adaptive` 关键字（需传 `WIDTHxHEIGHT` 或 2k/3k/4k）；图生图中可能出 AI 文字伪影 | 默认首选；尤其人像、Q版/丑萌需要保留角色的场景；中文/国风 prompt 效果也好 |
+| **MiniMax image-01**（备选 1） | 主体一致性强；国内直连 | 文字伪影相对更明显；图生图只支持 1 张 reference | 即梦 API 报错或缺 `ARK_API_KEY` 时回退 |
+| **宿主自带图生图**（备选 2） | 三档 `input_fidelity` 可精细控制构图保留度 | 主体一致性弱于上述两个 | 用户明确要求时 |
 
-**关于 `input_fidelity` 字段**：当前 MiniMax image-01 接口不直接接收三档保真度参数。该字段被保留为「风格作者设计意图标注」——`high` 风格的 prompt 会显式要求最大程度保留原图，`low` 风格的 prompt 则允许画面重构。
+**关于 `input_fidelity` 字段**：即梦和 MiniMax 的图生图 API 都不直接接收三档保真度参数。该字段被保留为「风格作者设计意图标注」——`high` 风格的 prompt 会显式要求最大程度保留原图，`low` 风格的 prompt 则允许画面重构。
 
-**关于 AI 文字伪影**：MiniMax image-01 在国风/水墨/古风类风格中偶尔会生成假字。规避方法：自定义/调整这类风格时在 prompt 里加 `no text, no letters, no characters, no watermark`。
+**关于 AI 文字伪影**：即梦和 MiniMax 在国风/水墨/古风/英文招牌类风格中偶尔会生成假字。规避方法：自定义/调整这类风格时在 prompt 里加 `no text, no letters, no characters, no watermark`。
 
 ## 扩充风格库
 
@@ -159,7 +160,8 @@ image-style-transfer/
 └── image-style-transfer/              # 技能包本体
     ├── SKILL.md                       # Agent 工作流指令（匹配→转换→批量→呈现）
     ├── scripts/
-    │   └── generate_image_minimax.py  # MiniMax image-01 生图脚本（默认引擎）
+    │   ├── generate_image_seedream.py  # 即梦 Seedream 5.0 Lite 生图脚本（默认引擎，Ark API）
+    │   └── generate_image_minimax.py   # MiniMax image-01 生图脚本（备选引擎 1）
     └── references/
         └── style-library.json         # 27 种风格提示词库（核心资产）
 ```
