@@ -14,42 +14,44 @@ description: 图片风格转换器。内置精心调校的 27 种风格提示词
    - 精确命中别名直接使用
    - 模糊说法（如"宫崎骏那种感觉"）按语义最近匹配，并在转换前告诉用户匹配到了哪个风格
    - 用户说的风格不在库中时，列出可用风格让用户挑选，或经用户确认后临场编写提示词
-3. **执行转换**：调用 `scripts/generate_image_minimax.py`（默认生图引擎，**MiniMax image-01**，国内直连 platform.minimaxi.com，参数同款 MiniMax-H3 视频脚本，stdlib only）：
+3. **执行转换**：调用 `scripts/generate_image_seedream.py`（**默认生图引擎：即梦「图片 5.0 Lite」= 火山方舟 `doubao-seedream-5-0-lite-260128`**，国内直连 ark.cn-beijing.volces.com，stdlib only）：
    ```bash
-   python3 ~/.workbuddy/skills/image-style-transfer/scripts/generate_image_minimax.py \
+   python3 ~/.workbuddy/skills/image-style-transfer/scripts/generate_image_seedream.py \
      "<风格库的 prompt 字段>" \
      --image <用户图片路径> \
-     --aspect-ratio 1:1|16:9|4:3|3:2|2:3|3:4|9:16|21:9 \
      --output-dir <用户工作区或指定目录> \
      --name <输出文件名前缀>
    ```
-   - 风格库的 `prompt` 字段原文直接传 `--prompt`；不要自己改写
-   - 宽高比尽量和原图一致（保持构图）；不知道原图尺寸时用 `ffprobe` 或 `sips -g pixelWidth -g pixelHeight` 先查
-   - **input_fidelity 字段当前不直接传给 MiniMax**（MiniMax image-01 的 subject_reference 没有三档保真度参数）；其作用仅作风格内部参考——重构型（low）的提示词通常已包含「保持原构图」之外的更自由指令，重绘型（high）的提示词侧重在原图上做最小改动
+   - 风格库的 `prompt` 字段原文直接传第一个位置参数；不要自己改写
+   - **自动按原图比例输出 2K 像素**（脚本读取参考图宽高比，按 2K 档位换算 `WIDTHxHEIGHT`，最长边 ~2368）；不传 `--image` 时是文生图，默认 2048x2048；显式 `--aspect-ratio` 或 `--size` 覆盖
+   - **input_fidelity 字段当前不直接传给 Seedream**（API 不暴露三档保真度参数）；其作用仅作风格内部参考——重构型（low）的提示词通常已包含「保持原构图」之外的更自由指令，重绘型（high）的提示词侧重在原图上做最小改动
 4. **呈现结果**：用 present_files 展示转换后的图片，说明用了哪个风格。
-5. **降级到 ImageGen**：仅当 `MINIMAX_API_KEY` 未配置 / API 报错 / 用户明确要求时，回退到内置 ImageGen 工具，参数映射：`input_fidelity` 直接对应 ImageGen 的同名参数，prompt 同样使用风格库原文。
+5. **降级路径**：
+   - 即梦 API 报错或 `ARK_API_KEY` 未配置 → 回退到 `scripts/generate_image_minimax.py`（MiniMax image-01，复用 `MINIMAX_API_KEY`）
+   - 用户明确要求"用 ImageGen"或宿主环境无上述脚本 → 回退到内置 ImageGen 工具，prompt 同样使用风格库原文
 
 ## 引擎选型
 
 | 引擎 | 优点 | 缺点 | 何时用 |
 |------|------|------|-------|
-| **MiniMax image-01**（默认） | 主体一致性强、人物面部保留好、构图还原稳；国内直连；按量计费便宜 | 偶尔出现 AI 文字伪影；不像 ImageGen 有三档 input_fidelity 可调 | 默认首选；尤其人像、Q版/丑萌类需要保留角色的场景 |
-| **ImageGen**（备选） | 三档 input_fidelity 可精细控制构图保留度；预设更丰富 | 主体一致性弱于 image-01，丑萌/Q版/换装等重构型容易跑脸 | MiniMax 不可用时；或用户明确要求 |
+| **即梦图片 5.0 Lite** = 火山方舟 `doubao-seedream-5-0-lite-260128`（**默认**） | 主体一致性很强、人物面部保留好、构图还原稳；国内直连；按张 ¥0.22 便宜；图生图支持 base64；可输出 1K/2K/3K/4K 多档 | 不接受 `size: adaptive` 关键字（必须传 `WIDTHxHEIGHT` 或 2k/3k/4k）；图片中仍可能出 AI 文字伪影 | 默认首选；尤其人像、Q版/丑萌类需要保留角色的场景；中文/国风 prompt 效果也好 |
+| **MiniMax image-01**（备选 1） | 主体一致性强；国内直连 | 文字伪影相对更明显；图生图只能用 `subject_reference`（最多 1 张） | 即梦 API 报错或缺 `ARK_API_KEY` 时回退 |
+| **ImageGen**（备选 2） | 三档 `input_fidelity` 可精细控制构图保留度；预设更丰富 | 主体一致性弱于上述两个；按张 credits 偏贵 | 用户明确要求时 |
 
 ## 批量模式
 
 - **多图单风格**：用户提供多张图 + 一个风格 → 逐张调用脚本（同一 prompt + 不同 image），全部完成后一次性 present_files。脚本本身也支持 `--batch` 风格的并发（可基于此扩展）。
 - **单图多风格**：用户提供一张图 + 多个风格（如"这张图分别试试吉卜力和赛璐璐"）→ 逐个风格调用，一次性展示全部结果方便对比。
-- 批量转换前先告知用户：MiniMax 按张计费，国内版 image-01 单价约 ¥0.2/张，单次任务超过 5 张时提醒用户。
+- 批量转换前先告知用户：即梦 Seedream 5.0 Lite 国内版按张计费约 ¥0.22/张（MiniMax image-01 约 ¥0.2/张），单次任务超过 5 张时提醒用户。
 
 ## 注意事项
 
 - 转换的语义是「保留原图的构图、主体和内容，只改变画风」——风格提示词里已包含此指令，不要额外改动导致偏离。
-- `input_fidelity` 字段当前主要作用是**风格作者自我标注**（low/medium/high 的设计意图），传给 MiniMax 脚本时一般不带（MiniMax 没有同名参数）；`high` 风格（仅 ins手绘plog）的提示词已显式要求最大程度保留原图。
-- **AI 文字伪影**：MiniMax image-01 在国风/水墨/古风类风格中偶尔会生成假字（"千秋""墨"等）。这是模型特性，不是 bug。规避方法：在提示词里加一句 "no text, no letters, no characters, no watermark"；新建/调整国风类风格时务必带上这条。
-- 若 `generate_image_minimax.py` 调用失败（HTTP 报错、缺 Key），重试一次；仍失败则降级到 ImageGen，并在呈现结果时说明本次用了哪个引擎。
+- `input_fidelity` 字段当前主要作用是**风格作者自我标注**（low/medium/high 的设计意图），传给 Seedream/MiniMax 脚本时一般不带（即梦/MiniMax 都没有同名参数）；`high` 风格（仅 ins手绘plog）的提示词已显式要求最大程度保留原图。
+- **AI 文字伪影**：即梦 Seedream 5.0 Lite 和 MiniMax image-01 在国风/水墨/古风/英文招牌类风格中都会偶尔生成假字（"千秋""墨""CAUTION"等）。这是模型特性，不是 bug。规避方法：在提示词末尾加一句 "no text, no letters, no characters, no watermark"；新建/调整国风类、英文招牌类风格时务必带上这条。
+- 若 `generate_image_seedream.py` 调用失败（HTTP 报错、缺 Key），回退到 `generate_image_minimax.py`（MiniMax）；仍失败再回退到 ImageGen，并在呈现结果时说明本次用了哪个引擎。
 - 风格库可扩充：新增风格时在 `references/style-library.json` 的 styles 数组中追加条目，保持相同字段结构（id、name_zh、name_en、aliases、prompt、input_fidelity）。
-- **国内直连前提**：`MINIMAX_API_KEY` 已设置在 `~/.zshrc` / `~/.zshenv`；缺 key 时脚本会立即报错并给出申请链接。
+- **国内直连前提**：`ARK_API_KEY`（火山方舟）已设置在 `~/.zshrc` / `~/.zshenv`；同时 `MINIMAX_API_KEY`（MiniMax）也建议设置好作为降级备用。缺 key 时脚本会立即报错并给出申请链接。
 
 ## 风格速查表
 
