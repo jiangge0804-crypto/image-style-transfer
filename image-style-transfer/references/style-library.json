@@ -1,0 +1,239 @@
+{
+  "version": 2,
+  "category": "动漫插画类",
+  "styles": [
+    {
+      "id": "ghibli",
+      "name_zh": "吉卜力风",
+      "name_en": "Studio Ghibli style",
+      "aliases": ["宫崎骏", "宫崎骏风", "ghibli", "吉卜力"],
+      "prompt": "Transform the input image into a hand-painted Studio Ghibli anime style. Keep the original subject, composition and layout intact. Soft watercolor-like backgrounds with lush painted skies and clouds, warm natural lighting, gentle rounded character designs with simple expressive faces, muted nostalgic color palette of greens, sky blues and warm earth tones. Painterly texture with visible brushstrokes, atmospheric depth, wholesome and dreamy mood. Cel animation feel, not photorealistic. No text, watermark or logo.",
+      "input_fidelity": "medium"
+    },
+    {
+      "id": "shinkai",
+      "name_zh": "新海诚风",
+      "name_en": "Makoto Shinkai style",
+      "aliases": ["新海诚", "你的名字", "shinkai", "新海诚风", "诚哥风"],
+      "prompt": "Transform the input image into a Makoto Shinkai anime style. Keep the original subject, composition and layout intact. Hyper-vivid saturated skies with dramatic clouds, lens flares and light rays, glowing golden-hour lighting, ultra-detailed backgrounds like painted glass, high-contrast cinematic color grading of purples, oranges and deep blues. Romantic emotional atmosphere, delicate highlights, sparkling light particles. Modern Japanese animation film aesthetic. No text, watermark or logo.",
+      "input_fidelity": "medium"
+    },
+    {
+      "id": "anime-cel",
+      "name_zh": "赛璐璐动画风",
+      "name_en": "Cel-shaded anime style",
+      "aliases": ["赛璐璐", "cel", "动画风", "日系动画", "anime", "番剧风"],
+      "prompt": "Transform the input image into a clean cel-shaded Japanese TV anime style. Keep the original subject, composition and layout intact. Flat color fills with hard-edged two-tone shading, crisp clean line art with consistent weight, large expressive anime eyes, bright limited color palette, simple gradient skies. Sharp vector-like outlines, typical of modern anime production. High contrast between light and shadow areas. No text, watermark or logo.",
+      "input_fidelity": "medium"
+    },
+    {
+      "id": "manga-bw",
+      "name_zh": "日式黑白漫画",
+      "name_en": "Black & white manga style",
+      "aliases": ["漫画", "黑白漫画", "manga", "日漫", "manga风", "少年漫"],
+      "prompt": "Transform the input image into a Japanese black-and-white manga style. Keep the original subject, composition and layout intact. Pure black ink line art with screentone dot shading, bold variable-weight brush strokes, dramatic cross-hatching for shadows, high contrast pure black and white only. Speed lines and dramatic panel energy where suitable. Classic ink-drawn manga aesthetic like weekly shonen magazine prints. No color, no text, no watermark.",
+      "input_fidelity": "medium"
+    },
+    {
+      "id": "american-comic",
+      "name_zh": "美式漫画风",
+      "name_en": "American comic book style",
+      "aliases": ["美漫", "美式漫画", "漫威", "DC", "comic", "美漫风"],
+      "prompt": "Transform the input image into a bold American comic book style. Keep the original subject, composition and layout intact. Heavy black ink outlines, halftone ben-day dot shading, saturated primary colors of red, blue, yellow, dramatic lighting with strong chiaroscuro, muscular heroic proportions, dynamic angular forms. Vintage pulp comic print texture. Classic silver-age superhero comic aesthetic. No text bubbles, no watermark.",
+      "input_fidelity": "medium"
+    },
+    {
+      "id": "thick-paint",
+      "name_zh": "厚涂插画",
+      "name_en": "Thick paint digital illustration",
+      "aliases": ["厚涂", "油画感", "impasto", "厚涂风", "概念插画"],
+      "prompt": "Transform the input image into a rich thick-paint digital illustration style. Keep the original subject, composition and layout intact. Visible impasto brushstrokes, painterly blended edges, deep atmospheric color layers, dramatic rim lighting, muted cinematic palette with jewel-tone accents. Concept-art quality rendering, oil-painting texture on digital canvas, soft depth of field. ArtStation trending illustration aesthetic. No text, watermark or logo.",
+      "input_fidelity": "medium"
+    },
+    {
+      "id": "flat-illustration",
+      "name_zh": "扁平插画",
+      "name_en": "Flat vector illustration",
+      "aliases": ["扁平", "扁平风", "矢量插画", "flat", "极简插画", "插画海报"],
+      "prompt": "Transform the input image into a modern flat vector illustration style. Keep the original subject, composition and layout intact. Clean geometric shapes, solid flat color fills with no gradients or texture, minimal facial details, harmonious limited palette of 4-6 colors, subtle grain-free surfaces, generous negative space. Contemporary editorial illustration aesthetic like New Yorker or dropbox-style brand art. No outlines heavier than needed, no text, no watermark.",
+      "input_fidelity": "medium"
+    },
+    {
+      "id": "chibi",
+      "name_zh": "Q版二头身",
+      "name_en": "Chibi style",
+      "aliases": ["Q版", "二头身", "chibi", "萌系", "Q版人物", "大头"],
+      "prompt": "Transform the input image into a cute chibi anime style. Keep the original subject identity, composition and layout intact but restyle characters as chibi: oversized round heads about half the body size, tiny stubby bodies, large sparkling eyes, blush cheek marks, simplified mitten hands. Soft pastel palette, kawaii aesthetic, clean line art, gentle shading. Playful and adorable mood. No text, watermark or logo.",
+      "input_fidelity": "low"
+    },
+    {
+      "id": "ukiyo-e",
+      "name_zh": "浮世绘",
+      "name_en": "Ukiyo-e woodblock print",
+      "aliases": ["浮世绘", "木版画", "和风", "ukiyo", "日本版画", "浪里"],
+      "prompt": "Transform the input image into a traditional Japanese ukiyo-e woodblock print style. Keep the original subject, composition and layout intact. Flat color planes with distinct outlines like carved woodblock prints, traditional Edo-period palette of Prussian blue, indigo, vermilion, ochre and black, visible woodgrain texture, wave and cloud patterns in the classic Hokusai-Hiroshige manner, paper texture base. No text, no artist seals, no watermark.",
+      "input_fidelity": "medium"
+    },
+    {
+      "id": "cyberpunk-anime",
+      "name_zh": "赛博朋克动漫",
+      "name_en": "Cyberpunk anime style",
+      "aliases": ["赛博朋克", "cyberpunk", "未来风", "霓虹", "科幻动漫"],
+      "prompt": "Transform the input image into a cyberpunk anime illustration style. Keep the original subject, composition and layout intact. Neon-lit night atmosphere with magenta and cyan glow, holographic signage reflections, rain-slicked surfaces with puddle reflections, high-tech low-life aesthetic, dramatic backlighting, dark base palette pierced by vivid neon accents. Anime cel-shading rendering with cinematic sci-fi mood. No text, watermark or logo.",
+      "input_fidelity": "medium"
+    },
+    {
+      "id": "ugly-cute-doodle",
+      "name_zh": "丑萌涂鸦插画",
+      "name_en": "Ugly-cute doodle illustration",
+      "category": "生活创意类",
+      "aliases": ["丑萌", "丑萌涂鸦", "沙雕", "沙雕涂鸦", "表情包风", "潦草手绘"],
+      "prompt": "丑萌沙雕风涂鸦插画，像是用平价蜡笔或马克笔随手乱画的潦草手稿。线条杂乱随性，比例和透视扭曲失衡，五官夸张又滑稽。颜色涂出边界、上色不均匀、笔触明显。画面上还点缀着一些乱七八糟、没什么意义的碎线条。背景是随便画几笔的简约漫画风，整体敷衍又随性，有种表情包的趣味感。拒绝真实精致规整，图片比例保持不变。",
+      "input_fidelity": "low"
+    },
+    {
+      "id": "colorwalk-fridge-character",
+      "name_zh": "Colorwalk人物冰箱贴",
+      "name_en": "Colorwalk fridge magnet character icon",
+      "category": "生活创意类",
+      "aliases": ["colorwalk", "冰箱贴", "人物冰箱贴", "冰箱贴人物", "冰箱贴图标"],
+      "prompt": "从照片中提取最具辨识度的主体人物元素，将其转化为简约的「冰箱贴式人物图标」。具体要求：1、保留人物的核心轮廓与标志性特征；2、造型简洁、干净，呈现旅行纪念品冰箱贴的质感；3、带有轻微立体感与投影效果；4、边缘清晰，配有白色或浅色描边；5、细节适度简化，避免过度复杂；6、图标整体尺寸小巧精致，四周留有充足留白。",
+      "input_fidelity": "low"
+    },
+    {
+      "id": "ins-handdrawn-plog",
+      "name_zh": "ins手绘感plog",
+      "name_en": "Instagram hand-drawn plog annotation",
+      "category": "生活创意类",
+      "aliases": ["ins风", "plog", "手绘笔记", "ins手绘", "手账风", "手绘注释", "plog风"],
+      "prompt": "请仔细观察图片内容，为画面中的所有元素加上白色手绘风格的注释与轮廓线。【绘制风格】使用白色细线手绘，单线完成，略带粗糙与不均匀感；沿物体外轮廓描边，线条可以有些微抖动；搭配箭头、虚线、弧线引导视线；整体像随手写下的笔记，兼具轻松感与设计感；呈现日系生活调性，低饱和度，柔光，轻微胶片感；画面保有「呼吸感」，不要堆满元素。【文字风格】中文手写风，自然且不工整；短句表达，像日记里的随口记录；语气轻松、带情绪、有点可爱；字体颜色为纯白色，字号小巧，手写在画面边缘；不要使用大标题。【内容规划】饮料：写口感+温度+情绪（如「清爽/微甜/很治愈」）；食物：写口感+满足感（如「酥脆/软糯/好吃到停不下来」）；环境：写氛围（如「放松/温暖/有烟火气」）；整体：一句话总结，简单但有共鸣。【装饰元素】少量添加蒸汽、闪光、星星、爱心、小表情点缀即可，保留画面留白；原则是像不经意画上去的，而非过度设计。【画面控制】注释分散排布，不遮挡主体；保持呼吸感，不要过于密集。【最终效果】时髦、干净、轻松，像随手记录生活的一张 Instagram story 风格高级日常图。",
+      "input_fidelity": "high"
+    },
+    {
+      "id": "city-pop",
+      "name_zh": "CityPop插画",
+      "name_en": "City Pop illustration",
+      "category": "潮流复古类",
+      "aliases": ["citypop", "city pop", "城市流行", "昭和风", "80年代日本", "昭和末期"],
+      "prompt": "City Pop 风格插画，融入80年代日本动画美学，采用扁平化矢量表现手法。画面以干净的色块进行分割，运用高饱和度的复古配色，呈现出昭和末期浓浓的怀旧氛围。构图富有电影感，采用广角远景拍摄，描绘一片宁静的日本城郊场景。整幅画面没有多余文字，整体干净通透，色彩明快。请在图片上添加与画面内容相匹配的手写英文文字，保持原有图片比例不变，达到高清画质。",
+      "input_fidelity": "medium"
+    },
+    {
+      "id": "healing-illustration",
+      "name_zh": "治愈风插画",
+      "name_en": "Healing illustration",
+      "category": "生活创意类",
+      "aliases": ["治愈", "治愈系", "治愈风", "healing", "意识流插画"],
+      "prompt": "将整张图片进行风格转换，呈现复杂画风的治愈系插画，融合童趣涂鸦与意识流表达。采用大色块铺陈与颗粒肌理，色彩鲜艳饱和，搭配纯色背景。整体风格介于抽象插画与扁平插画之间，充满童趣涂鸦的随性自由感。",
+      "input_fidelity": "medium"
+    },
+    {
+      "id": "pop-art-halftone",
+      "name_zh": "波普风格插画",
+      "name_en": "Pop art halftone illustration",
+      "category": "潮流复古类",
+      "aliases": ["波普", "波普风", "pop", "pop art", "半色调网点", "复古印刷", "网点风"],
+      "prompt": "矢量风格平面插画，融入半色调网点印刷纹理与波普艺术气息，呈现复古漫画书的质感。画面带有怀旧儿童绘本的趣味，运用网点印刷风格与图形化设计，整体可爱俏皮。线条清晰利落，点状纹理与粗糙印刷感交织，展现二维平面设计特有的魅力。不采用真实阴影，依靠半色调网点的疏密变化来塑造明暗；色彩方案有限但鲜艳饱和，避免渐变与繁琐细节。造型简洁明快，对比度高，辅以粗黑的轮廓描边，富有1950至1960年代儿童绘本的印刷质感。画面中不出现文字，突出手工绘制的不完美、不规整感。整幅图背景为白色并叠加细腻的颗粒纹理，模拟纸张的自然质感。",
+      "input_fidelity": "medium"
+    },
+    {
+      "id": "childlike-doodle",
+      "name_zh": "童趣涂鸦插画",
+      "name_en": "Childlike doodle illustration",
+      "category": "生活创意类",
+      "aliases": ["童趣", "童趣涂鸦", "儿童涂鸦", "民间插画", "儿童插画"],
+      "prompt": "请将整个图像转换成单一含有涂鸦元素的民间平面插图。用大胆俏皮的调色盘，跟原图完全不同。将所有细节简化成干净平整的形状，搭配手工制作、略带不完美的手感，仿佛画在一张白纸上。整体风格要看起来可爱、童趣、异想天开。",
+      "input_fidelity": "low"
+    },
+    {
+      "id": "guofeng-texture",
+      "name_zh": "国风肌理插画",
+      "name_en": "Chinese-style textured illustration",
+      "category": "国风艺术类",
+      "aliases": ["国风", "国风肌理", "肌理插画", "蓝紫渐变", "马卡龙渐变", "磨砂质感插画"],
+      "prompt": "将照片转为扁平矢量插画，极简实验性，平面插画，先锋概念，高级感，抽象，大师杰作，半调网屏，渐变映射，噪点颗粒质感，温柔治愈感，弥散渐变，马卡龙渐变效果，整体采用梦幻蓝紫色调为主，明亮天蓝色到柔粉色渐变，采用肌理磨砂质感，画面干净整洁，点线面层次分布，杰作，商业插画质感，8K超高清，白色到蓝紫色渐变背景。",
+      "input_fidelity": "medium"
+    },
+    {
+      "id": "guochao-gold",
+      "name_zh": "国潮鎏金插画",
+      "name_en": "Guochao gilded illustration",
+      "category": "国风艺术类",
+      "aliases": ["国潮", "鎏金", "国潮风", "敦煌风", "翠绿洒金", "洒金插画"],
+      "prompt": "翠绿，洒金，城市地标，插画设计，动态张力，视觉韵律，色彩叙事，敦煌色彩，光影幻像，丰富装饰性元素，流畅曲线构成轮廓，下方前景及上方背景有机线条引导视线，透明水色，骨法描线，平涂铺色，光影感强，色彩对比强，深绿到亮绿，细腻质感，姿态万千，随类赋彩。",
+      "input_fidelity": "low"
+    },
+    {
+      "id": "japanese-geometric",
+      "name_zh": "日系几何平面",
+      "name_en": "Japanese geometric flat design",
+      "category": "潮流复古类",
+      "aliases": ["日系几何", "几何平面", "丝网印刷", "90年代复古", "日式平面", "丝网印刷风"],
+      "prompt": "将照片转为极简风格，日系风格，染色、丝网印刷。主体是平面插画变形抽象，高饱和，融合日系平面设计风格，用几何块面堆叠互动场景，呈现90年代复古童趣美学。",
+      "input_fidelity": "low"
+    },
+    {
+      "id": "surreal-engraving",
+      "name_zh": "超现实铜版画",
+      "name_en": "Surreal copperplate engraving",
+      "category": "国风艺术类",
+      "aliases": ["铜版画", "超现实版画", "版画", "铜版雕刻", "蓝色版画"],
+      "prompt": "铜版画风格，满画幅，极繁主义，极繁蓝色#1c1cf5线条，勾线清晰，高饱和色，高对比度，采用超现实自然融合风格。纯白色为背景营造宁静氛围，搭配蓝色#1c1cf5。塑造梦幻浪漫的画面，呈现蓝色花卉及植物完美融合，点缀微小生物，丰富细节强化超现实感。借细腻笔触与逼真纹理，营造自然奇幻、诗意满满的氛围，展现生命与自然融合的美好意境，让观者沉浸于奇幻诗意视觉体验。丰富的细节、装饰图案、层次感、空间感，呈现出一种神圣感，令人震撼的画面，高清，高细节。",
+      "input_fidelity": "low"
+    },
+    {
+      "id": "architectural-infographic",
+      "name_zh": "建筑信息图插画",
+      "name_en": "Architectural infographic illustration",
+      "category": "建筑海报类",
+      "aliases": ["建筑插画", "信息图", "建筑信息图", "建筑矢量", "测绘图", "建筑海报图", "线性矢量"],
+      "prompt": "将上传照片中的建筑本体重塑为具有信息图表美感的二维矢量插画，精细还原建筑的外轮廓线条、结构比例、屋顶造型、立面层次、窗洞布局及核心色彩特征，彻底剔除背景中的天空、行人、街道、植被及各类杂物遮挡。画面采用纯白或极简浅色调为底，建筑主体呈正立面图中排布，遵循建筑正立面图的对称构图法则。运用干练的深色描边，扁平化色块组合，基础明暗调性与微量高光点缀，营造出洁净、现代且极具专业感的制图效果。左上角依建筑属性标注英文标题（如 Palace、Skyscraper、Bridge 等）；建筑后方加入超大号浅灰色半透明文字（含名称或地标信息）作为装饰底衬，确保不干扰主体。严格按建筑实际物理参数添加测量线：高耸型建筑在左侧标注「Height: 实际高度m」，延展型建筑则在底部标注「Length」或「Width」及相应数值。若数据不确切，请标注「Approx.」或仅保留测量线，杜绝虚构数值。画面边缘配置简约比例尺，右侧辅以竖排红色说明文本，罗列建筑名称、城市及建成年代，整体视觉风格对标高端建筑科普海报与现代测绘档案，强调线条规整、配色统一、留白考究且充满设计张力。",
+      "input_fidelity": "low"
+    },
+    {
+      "id": "childlike-sketch",
+      "name_zh": "平面简笔手绘",
+      "name_en": "Childlike simple sketch",
+      "category": "生活创意类",
+      "aliases": ["简笔画", "儿童简笔", "简笔手绘", "手绘简笔", "稚拙风"],
+      "prompt": "将图片变成纯手绘儿童简笔画风格，线条随性稚嫩无刻意修饰，造型极简且充满童真，色调以手绘线条为基底，突出手绘质感。采用平视的平面化构图，适当投影感，外轮廓线条很粗，图片所有线条都是手工绘制的摇摆不定的、不完善的，整体感觉是原始的、触觉的幼稚的艺术，画面无字，白色细腻颗粒纹理纸质背景。",
+      "input_fidelity": "medium"
+    },
+    {
+      "id": "dopamine",
+      "name_zh": "多巴胺插画",
+      "name_en": "Dopamine illustration",
+      "category": "潮流复古类",
+      "aliases": ["多巴胺", "dopamine", "多巴胺配色", "多巴胺风"],
+      "prompt": "潮流创意矢量手绘，融合流畅曲线与简约线条组合成型，简约线条搭配柔和治愈色块拼接而成，主打简约清新设计风格，适配活泼亮眼多巴胺潮流配色，去除建筑全部写实纹路与繁杂细节，灵动线条搭配随性不规则圆弧色块组合装饰，自带自然柔和艺术质感，风格新潮前卫充满创意，整体采用纯白纯色背景衬托主体。",
+      "input_fidelity": "low"
+    },
+    {
+      "id": "exploded-architecture",
+      "name_zh": "概念性分解建筑",
+      "name_en": "Exploded architectural diagram",
+      "category": "建筑海报类",
+      "aliases": ["分解建筑", "爆炸图", "建筑分解", "建筑爆炸图", "3D分解", "建筑拆解"],
+      "prompt": "以超精细3D渲染的建筑组装体作为中心主体，置于纯白技术制图背景之上，采用超广角低视角绘制，以突出其宏伟的尺度感、完美的轴对称性、庄严的建筑韵律感和强大的结构张力。请先观察图片中的建筑，识别出最具辨识度的6个核心建筑特征（如屋顶、立面、拱门、塔楼、基座、门窗等标志性结构），将它们作为主要结构元素，所有元素均呈沿建筑主透视轴精确对齐的轴向分解布局，组件间间距均匀，悬浮于空中。中心渲染图周围环绕着密集的技术标注层：立面图与剖面图、屋顶桁架结构分解图、详细构件图、尺寸线、材料规格说明、施工注释以及指向关键建筑特征的标注箭头。",
+      "input_fidelity": "low"
+    },
+    {
+      "id": "building-fridge-magnet",
+      "name_zh": "建筑冰箱贴设计",
+      "name_en": "Building fridge magnet icon",
+      "category": "建筑海报类",
+      "aliases": ["建筑冰箱贴", "地标冰箱贴", "建筑图标", "建筑贴纸"],
+      "prompt": "从真实照片中提取最有识别度的主体建筑元素，例如窗户、门廊、立面、拱门、屋顶、阳台或建筑正面。将该建筑元素转化为一个简约的「冰箱贴式建筑图标」：1、保留建筑的核心轮廓和标志性特征；2、造型简洁、干净，像旅行纪念冰箱贴；3、有轻微立体感和投影；4、边缘清晰，白色或浅色描边；5、细节适度简化，不要画得太复杂。",
+      "input_fidelity": "low"
+    },
+    {
+      "id": "luxury-architecture-poster",
+      "name_zh": "高端插画海报",
+      "name_en": "Luxury architecture art poster",
+      "category": "建筑海报类",
+      "aliases": ["高端海报", "轻奢海报", "建筑海报", "艺术海报", "轻奢风", "展馆海报"],
+      "prompt": "以实景建筑为原型，创作轻奢简约风建筑艺术竖版海报，留存建筑经典轮廓、整体构造、材质质感与精准比例，剔除人群车流、水印杂物等多余元素，建筑居中作为视觉核心精致呈现。建筑后方搭配粗体高级艺术英文大字，字体设计简约大气，文字穿插掩映在建筑后方，字体线条贴合建筑线条、弧度、屋檐与立面结构，视觉融为一体。整体风格贴合艺术展馆视觉海报、时尚杂志封面与艺术收藏挂画调性，色调取自建筑原生质感，选用米白、浅灰、石材原色、浅金、深灰、砖棕、原木色等低饱和高级色系，拒绝艳丽亮色。画面点缀简约英文短句诠释设计理念，搭配细线条、圆点、几何辅助线条丰富细节，画面底部标注建筑全称与所属城市地域。整体主打简约高级、留白充足、排版精致、色彩干净纯粹，极具建筑艺术感。",
+      "input_fidelity": "medium"
+    }
+  ]
+}
