@@ -3,17 +3,29 @@
 > 一个开箱即用的 **AI Agent Skill**：上传任意图片，说一句风格名，自动转换为 27 种精心调校的画风。
 > 你不需要会写提示词，中文随口一说就行。
 
-[![Skill](https://img.shields.io/badge/type-Agent%20Skill-blue)](https://github.com) [![Styles](https://img.shields.io/badge/styles-27-green)](image-style-transfer/references/style-library.json) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Skill](https://img.shields.io/badge/type-Agent%20Skill-blue)](https://github.com) [![Styles](https://img.shields.io/badge/styles-27-green)](image-style-transfer/references/style-library.json) [![Engine](https://img.shields.io/badge/engine-MiniMax%20image--01-orange)](image-style-transfer/scripts/generate_image_minimax.py) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ---
 
 ## 这是什么
 
-`image-style-transfer` 是一个遵循 **Agent Skill 规范**（SKILL.md + references 资产文件）的技能包。把它安装到任何支持 Skills 的 AI 助手（如 WorkBuddy、Claude 等具备图生图能力的 Agent）后，助手会获得一个「图片风格转换器」：
+`image-style-transfer` 是一个遵循 **Agent Skill 规范**（SKILL.md + references 资产文件）的技能包。把它安装到任何支持 Skills 的 AI 助手后，助手会获得一个「图片风格转换器」：
 
 ```
 你：上传一张照片 +「转成吉卜力风」
-AI：自动匹配风格库 → 调用图生图 → 返回转换后的图片
+AI：自动匹配风格库 → 调用生图引擎 → 返回转换后的图片
+```
+
+**默认生图引擎：MiniMax image-01（海螺生图）**——skill 自带 [`scripts/generate_image_minimax.py`](image-style-transfer/scripts/generate_image_minimax.py)，国内直连 [platform.minimaxi.com](https://platform.minimaxi.com)，仅需配置 `MINIMAX_API_KEY` 即可使用；无 Key 或 API 不可用时，自动降级到宿主 Agent 自带的通用图生图工具。
+
+```
+你：上传一张照片 +「转成吉卜力风」
+  ↓
+Agent 读 style-library.json 匹配 → 取出 prompt + input_fidelity
+  ↓
+调用 scripts/generate_image_minimax.py (--image <你的照片> --prompt <库里提示词> --aspect-ratio ...)
+  ↓
+国内直连 MiniMax image-01 → 返回生成图
 ```
 
 **核心资产**是 [`references/style-library.json`](image-style-transfer/references/style-library.json)：27 个风格条目，每个都包含——
@@ -23,7 +35,7 @@ AI：自动匹配风格库 → 调用图生图 → 返回转换后的图片
 | `id` / `name_zh` / `name_en` | 风格标识与中英文名 |
 | `aliases` | 中文触发词别名（说任何一个都能命中） |
 | `prompt` | 精心调校的风格提示词原文 |
-| `input_fidelity` | 图生图保真度（`high` 保留原图 / `medium` 保留构图 / `low` 允许重构） |
+| `input_fidelity` | 设计意图标注（`high` 保留原图 / `medium` 保留构图 / `low` 允许重构） |
 
 ## 内置 27 种风格
 
@@ -76,20 +88,23 @@ AI：自动匹配风格库 → 调用图生图 → 返回转换后的图片
 
 ## 安装
 
-### 方式一：手动安装（适用于 WorkBuddy 等支持 Skills 目录的助手）
+### 前提
+
+- 一个能调用图生图的 Agent 环境（WorkBuddy、Claude Code、Cursor 等均可）
+- 若使用默认的 **MiniMax image-01** 引擎：申请一个 [MiniMax 开放平台 API Key](https://platform.minimaxi.com/user-center/basic-information/interface-key)，写到 shell 配置：
+  ```bash
+  echo 'export MINIMAX_API_KEY="你的key"' >> ~/.zshrc && source ~/.zshrc
+  ```
+  无 Key 时 Agent 会自动降级到宿主自带的图生图工具。
+
+### 安装
 
 ```bash
 git clone https://github.com/jiangge0804-crypto/image-style-transfer.git
 cp -r image-style-transfer/image-style-transfer ~/.workbuddy/skills/
 ```
 
-安装后重启会话或新开对话即可生效，无需任何配置。
-
-### 方式二：整仓引用
-
-如果你的 Agent 支持从 URL 加载 Skill，直接指向本仓库的 [`image-style-transfer/SKILL.md`](image-style-transfer/SKILL.md) 即可。
-
-> 前提：宿主 Agent 需具备**图生图能力**（接收图片+提示词输出图片的工具，如各类图像生成 API）。
+安装后重启会话或新开对话即可生效。
 
 ## 使用
 
@@ -102,6 +117,17 @@ cp -r image-style-transfer/image-style-transfer ~/.workbuddy/skills/
 - 「这张图分别试试**CityPop**和**波普**」（批量：单图多风格对比）
 
 Agent 会读取风格库匹配触发词 → 取出调校好的提示词 → 按该风格配置的保真度调用图生图 → 返回结果。
+
+## 引擎说明
+
+| 引擎 | 优点 | 缺点 | 何时使用 |
+|------|------|------|---------|
+| **MiniMax image-01**（默认） | 主体一致性强、人物面部保留好；国内直连快、便宜 | 国风/水墨类偶有 AI 文字伪影 | 默认首选；人像、Q版、丑萌等需要保留角色的场景 |
+| **宿主自带图生图**（备选） | 多档保真度可调；预设丰富 | 主体一致性弱于 image-01；换装/重构容易跑脸 | 无 MINIMAX_API_KEY 时；用户明确要求时 |
+
+**关于 `input_fidelity` 字段**：当前 MiniMax image-01 接口不直接接收三档保真度参数。该字段被保留为「风格作者设计意图标注」——`high` 风格的 prompt 会显式要求最大程度保留原图，`low` 风格的 prompt 则允许画面重构。
+
+**关于 AI 文字伪影**：MiniMax image-01 在国风/水墨/古风类风格中偶尔会生成假字。规避方法：自定义/调整这类风格时在 prompt 里加 `no text, no letters, no characters, no watermark`。
 
 ## 扩充风格库
 
@@ -132,6 +158,8 @@ image-style-transfer/
 ├── LICENSE                            # MIT
 └── image-style-transfer/              # 技能包本体
     ├── SKILL.md                       # Agent 工作流指令（匹配→转换→批量→呈现）
+    ├── scripts/
+    │   └── generate_image_minimax.py  # MiniMax image-01 生图脚本（默认引擎）
     └── references/
         └── style-library.json         # 27 种风格提示词库（核心资产）
 ```
